@@ -11,3 +11,11 @@
 #### [Zadanie](./Docs/Task2.md)
 
 #### [Rozwiązanie](./Docs/Task2Solution.md)
+
+### 3. ...
+
+### 4. Triggery
+
+#### [Zadanie](./Docs/Task4.md)
+
+#### [Rozwiązanie](./Docs/Task4Solution.md)
