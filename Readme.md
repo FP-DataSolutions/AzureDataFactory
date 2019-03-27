@@ -12,9 +12,13 @@
 
 #### [Rozwiązanie](./Docs/Task2Solution.md)
 
-### 3. ...
+### 3. Triggery.
 
-### 4. Triggery
+#### [Zadanie](./Docs/Task3.md)
+
+#### [Rozwiązanie](./Docs/Task3Solution.md)
+
+### 4. Scheduler.
 
 #### [Zadanie](./Docs/Task4.md)
 
