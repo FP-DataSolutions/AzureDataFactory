@@ -1,0 +1,3 @@
+# Zadanie 2
+
+W ramach tego zadania należy stworzyć za pomocą **Data Factory UI** potok do kopiowania danych pomiędzy usługami w chmurze. W katalogu **Data** znajduje się folder o nazwie **Parking**. Znajdziesz w nim plik ***.zip** z niewielkim datasetem. Po rozpakowaniu należy przy pomocy dowolnego narzędzia wgrać go do magazynu danych Azure Storage Manager. Następnie należy stworzyć potok do skopiowania danych z magazynu do nowej tabeli wewnątrz bazy danych Azure SQL Database.
