@@ -11,78 +11,74 @@ W ramach tego zadania należy stworzyć potok służący do szyfrowania wszystki
 - dodać kolejne activity aktualizujące dodany wcześniej wpis ustawiający flagę **IN_PROGRESS** na **0** oraz **COMPLETED** na **1**,
 
 ```
-public async static Task<JObject> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, TraceWriter log)
+public static async Task<JObject> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, TraceWriter log)
+{
+    // getting data from request's body
+    const string destination = "encrypted";
+    const string storageConnection = "PUT_CONNECTIONSTRING_HERE";
+    var requestBody = new StreamReader(req.Body).ReadToEnd();
+    dynamic data = JsonConvert.DeserializeObject(requestBody);
+    string directory = data.directory;
+    string filename = data.filename;
+    string ciphertext;
+
+    log.Info($"Source directory: {directory}");
+    log.Info($"Filename to encrypt: {filename}");
+
+    // downloading blobs content
+    var cloudStorageAccount = CloudStorageAccount.Parse(storageConnection);
+    var cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
+    var cloudBlobContainer = cloudBlobClient.GetContainerReference(directory);
+    var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(filename);
+    var plaintext = await cloudBlockBlob.DownloadTextAsync();
+
+    // encrypting message using AES
+    using (var aes = new RijndaelManaged())
+    {
+        aes.GenerateKey();
+        aes.GenerateIV();
+        var encrypted = EncryptStringToBytes(plaintext, aes.Key, aes.IV);
+        var sb = new StringBuilder();
+        foreach (var item in encrypted)
         {
-            // getting data from request's body
-            string requestBody = new StreamReader(req.Body).ReadToEnd();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            string directory = data.directory;
-            string filename = data.filename;
-            string destination = "encrypted";
-            string ciphertext;
-
-            log.Info($"Source directory: {directory}");
-            log.Info($"Filename to encrypt: {filename}");
-
-            // downloading blobs content
-            string storageConnection = "DefaultEndpointsProtocol=https;AccountName=adfworkshopsasm;AccountKey=N/0QJpS6vmpNk6M2oyPjQNTBME8cQyj9tgVCsFylLEgRKhdXvZXRRBi8JSJSrQsRc0GkWijWQrNv6spbIBbpAA==;EndpointSuffix=core.windows.net";
-            CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(storageConnection);
-            CloudBlobClient cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-            CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference(directory);
-            CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(filename);
-
-            string plaintext = await cloudBlockBlob.DownloadTextAsync();
-
-            // encrypting message using AES
-            using (RijndaelManaged aes = new RijndaelManaged())
-            {
-                aes.GenerateKey();
-                aes.GenerateIV();
-                byte[] encrypted = EncryptStringToBytes(plaintext, aes.Key, aes.IV);
-                StringBuilder sb = new StringBuilder();
-                foreach (byte item in encrypted)
-                {
-                    sb.Append(item.ToString("X2") + " ");
-                }
-
-                ciphertext = sb.ToString();
-            }
-
-            // saving ciphertexts in blob
-            CloudBlobContainer container = cloudBlobClient.GetContainerReference(destination);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(filename);
-            
-            await container.CreateIfNotExistsAsync();
-            await blockBlob.UploadTextAsync(ciphertext);
-
-            var result = new JObject();
-            result.Add(new JProperty("Status", "OK"));
-            return result;
+            sb.Append(item.ToString("X2") + " ");
         }
 
-        static byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
+        ciphertext = sb.ToString();
+    }
+
+    // saving ciphertexts in blob
+    var container = cloudBlobClient.GetContainerReference(destination);
+    var blockBlob = container.GetBlockBlobReference(filename);
+    
+    await container.CreateIfNotExistsAsync();
+    await blockBlob.UploadTextAsync(ciphertext);
+    return new JObject { new JProperty("Status", "OK") };
+}
+
+private static byte[] EncryptStringToBytes(string plainText, byte[] key, byte[] iv)
+{
+    byte[] encrypted;
+    using (var rijAlg = new RijndaelManaged())
+    {
+        rijAlg.Key = key;
+        rijAlg.IV = iv;
+
+        var encryptor = rijAlg.CreateEncryptor(rijAlg.Key, rijAlg.IV);
+        using (var msEncrypt = new MemoryStream())
         {
-            byte[] encrypted;
-            using (RijndaelManaged rijAlg = new RijndaelManaged())
+            using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
             {
-                rijAlg.Key = Key;
-                rijAlg.IV = IV;
-
-                ICryptoTransform encryptor = rijAlg.CreateEncryptor(rijAlg.Key, rijAlg.IV);
-                using (MemoryStream msEncrypt = new MemoryStream())
+                using (var swEncrypt = new StreamWriter(csEncrypt))
                 {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            swEncrypt.Write(plainText);
-                        }
-
-                        encrypted = msEncrypt.ToArray();
-                    }
+                    swEncrypt.Write(plainText);
                 }
-            }
 
-            return encrypted;
+                encrypted = msEncrypt.ToArray();
+            }
         }
+    }
+
+    return encrypted;
+}
 ```
