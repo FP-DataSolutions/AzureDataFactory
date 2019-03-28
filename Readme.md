@@ -12,13 +12,13 @@
 
 #### [Rozwiązanie](./Docs/Task2Solution.md)
 
-### 3. Triggery.
+### 3. Uruchamianie potoku za pomocą wyzwalaczy.
 
 #### [Zadanie](./Docs/Task3.md)
 
 #### [Rozwiązanie](./Docs/Task3Solution.md)
 
-### 4. Scheduler.
+### 4. Przetwarzanie danych zgodnie z ustalontym harmonogramem.
 
 #### [Zadanie](./Docs/Task4.md)
 

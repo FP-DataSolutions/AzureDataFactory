@@ -24,11 +24,7 @@ Aby stworzyć dataset kilkamy w ikonkę ołówka (author) znajdującą się po l
 
 ![Upload datasetu do ASA](../Imgs/DataSetASA.png)
 
-Następnie nazwij swój dataset, np. **ParkingASADataSet** i przejdź do zakładki **Connection**. Koniecznym będzie stworzenie tzw. **Linked service** za pomocą którego będziemy mogli połączyć się do magazynu danych. Kliknij w plus z napisem **New** znajdujący się po prawej stronie. Przechodzimy do konfiguracji serwisu. Nazwij swoje połączenie, a następnie w sekcji **Connect via integration runtime** kliknij w listę rozwijalną i wybierz opcję **New**. Teraz kliknij w kafelek **Azure Public** - będziemy działać tylko w obszarze chmury Azure:
-
-![Azure Public Integration Runtime](../Imgs/IntegrationRuntimeAzureADF.png)
-
-Nazwij swój runtime, a jako region wybierz **North Europe**. Wracamy do konfiguracji serwisu. Magazyn danych podlinkujemy za pomocą **Connection Stringa**. Magazyn powinien być dostępny po wybraniu subskrypcji:
+Następnie nazwij swój dataset, np. **ParkingASADataSet** i przejdź do zakładki **Connection**. Koniecznym będzie stworzenie tzw. **Linked service** za pomocą którego będziemy mogli połączyć się do magazynu danych. Kliknij w plus z napisem **New** znajdujący się po prawej stronie. Przechodzimy do konfiguracji serwisu. Magazyn danych podlinkujemy za pomocą **Connection Stringa**. Magazyn powinien być dostępny po wybraniu subskrypcji:
 
 ![Nowy Linked Service](../Imgs/NewLinkedService.png)
 

@@ -150,7 +150,7 @@ Dodaj do projektu kolejny activity, pozwalający na uruchamianie funkcji Azure'o
 
 Jako metodę wykorzystywaną przez Azure Functions activity wybierz **POST**. Konieczna będzie jeszcze konfiguracja parametru **body**. Klikając w pole powinna stać się widoczny link z napisem **Add dynamic content**. Wybierając tą opcję zostaniemy przeniesieni do specjalnego edytora w ramach którego będziemy w stanie zparametryzować treść naszego **body**. Jako wartość ustaw poniższy json:
 
-```json
+```
 @concat(
 '{ ',
 '"directory": "', pipeline().parameters.sourceFolder, '",',
