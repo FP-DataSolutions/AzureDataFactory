@@ -23,3 +23,21 @@
 #### [Zadanie](./Docs/Task4.md)
 
 #### [Rozwiązanie](./Docs/Task4Solution.md)
+### 5. Konfiguracja ADF-Self Hosted IR
+
+#### [Zadanie](./Docs/Task5.md)
+
+#### [Rozwiązanie](./Docs/Task5Solution.md)
+
+### 6. Przetwarzanie obrazków na ADLA
+
+#### [Zadanie](./Docs/Task6.md)
+
+#### [Rozwiązanie](./Docs/Task6Solution.md)
+
+### 7. Przetwarzanie danych na Azure Databricks na klastrze uruchamianym na żądanie
+
+#### [Zadanie](./Docs/Task7.md)
+
+#### [Rozwiązanie](./Docs/Task7Solution.md)
+
