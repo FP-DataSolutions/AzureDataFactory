@@ -12,7 +12,17 @@
 
 #### [Rozwiązanie](./Docs/Task2Solution.md)
 
+### 3. Triggery.
 
+#### [Zadanie](./Docs/Task3.md)
+
+#### [Rozwiązanie](./Docs/Task3Solution.md)
+
+### 4. Scheduler.
+
+#### [Zadanie](./Docs/Task4.md)
+
+#### [Rozwiązanie](./Docs/Task4Solution.md)
 ### 5. Konfiguracja ADF-Self Hosted IR
 
 #### [Zadanie](./Docs/Task5.md)
@@ -25,8 +35,9 @@
 
 #### [Rozwiązanie](./Docs/Task6Solution.md)
 
-### 6. Przetwarzanie danych na Azure Databricks na klastrze uruchamianym na żądanie
+### 7. Przetwarzanie danych na Azure Databricks na klastrze uruchamianym na żądanie
 
 #### [Zadanie](./Docs/Task7.md)
 
 #### [Rozwiązanie](./Docs/Task7Solution.md)
+

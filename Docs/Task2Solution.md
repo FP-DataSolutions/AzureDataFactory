@@ -49,6 +49,19 @@ Aby zapisać skonfigurowany dataset kliknij w zakładkę **Publish All**.
 
 Na podstawie instrukcji zawartej powyżej stwórz drugi dataset, tym razem dla bazy danych Azure SQL Databse. Konieczne będzie dodanie tabeli służącej do przechowywania załadowanych danych. Pamiętaj, żeby przy importowaniu schemy usunąć wszelkie atrybuty pełnioce rolę klucza.
 
+Skypt SQL do stworzenia tabeli:
+
+```sql
+CREATE TABLE [dbo].[Parking]
+(
+	[Id] INT IDENTITY(1,1),
+	[SystemCodeNumber] VARCHAR(255) NULL,
+	[Capacity] INT NULL,
+	[Occupancy] INT NULL,
+	[LastUpdated] DATETIME NULL
+)
+```
+
 ## Potok do kopiowania danych
 
 Aby dodać nowy potok kliknij ponowne w plus, a następnie kliknij w **pipeline**. Można również skorzystać z gotowego kreatora potoków służących do kopiowania danych wybierając ostatnią opcję **Copy Data**, aczkolwiek w zadaniu skupimy się na piewrszym wymienionym sposobie. Następnie z listy dostępnych **Activities** rozwiń zakładkę **Move & Transform** i przeciągnij element **Copy Data** na workspace. Teraz przechodzimy na zakładkę **Source**, w której wskazujemy odpowiedni **source dataset**. Następnie klikamy w zakładkę **Sink**. Na chwilę obecną nie ustawiamy żadnej procedury składowanej. Przechodzimy do zakładki **Mapping** i klikamy w przycisk **Import schemas**, powinniśmy uzyskać efekt podobny do przedstawionego poniżej:
