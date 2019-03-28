@@ -55,4 +55,4 @@ Aby dodać nowy potok kliknij ponowne w plus, a następnie kliknij w **pipeline*
 
 ![Mappowanie ADF](../Imgs/MappingADF.png)
 
-W celu uruchomienia potoku kliknij w przycisk **Debug**.
+W celu uruchomienia potoku kliknij w przycisk **Debug**. Po zakończeniu potoku sprawdź czy na bazie pojawiły się jakieś dane.
