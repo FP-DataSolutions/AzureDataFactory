@@ -18,7 +18,7 @@
 
 #### [Rozwiązanie](./Docs/Task3Solution.md)
 
-### 4. Przetwarzanie danych zgodnie z ustalontym harmonogramem.
+### 4. Przetwarzanie danych zgodnie z ustalontym harmonogramem
 
 #### [Zadanie](./Docs/Task4.md)
 
