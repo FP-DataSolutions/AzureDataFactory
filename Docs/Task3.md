@@ -1,14 +1,14 @@
 # Zadanie 3
 
-W ramach tego zadania należy stworzyć potok służący do szyfrowania wszystkich przesłanych plików tekstowych. W ramach potoku należy:
+W ramach tego zadania należy stworzyć pipeline służący do szyfrowania wszystkich przesłanych na magazyn danych plików tekstowych. W ramach potoku należy:
 
-- skonfigurować wyzwalacz uruchamiający potok, gdy na magazynie danych pojawi się nowy plik tekstowy (o rozszerzeniu *.txt) wewnątrz kontenera **toencrypt**,
+- skonfigurować wyzwalacz uruchamiający pipeline, gdy na magazynie danych pojawi się nowy plik tekstowy (o rozszerzeniu *.txt) wewnątrz kontenera **toencrypt**,
 
-- dodać activity zapisujące do stworzonej wcześniej bazy danych informacje o nazwie pliku do zaszyfrowania, czasie jego spłynięcia do magazynu (stored procedure). Ponadto procedura powinna ustawić dwa wartości dwóch dodatkowych atrybutów mianowicie **IN_PROGRESS** (na **1**) oraz **COMPLETED** (na **0**) w celu zwizualizowania aktualnego stanu szyfrowanych plików,
+- dodać activity zapisujące do stworzonej wcześniej bazy danych informacje o nazwie pliku do zaszyfrowania, czasie jego spłynięcia do magazynu (stored procedure). Ponadto procedura powinna ustawić dwa wartości dwóch dodatkowych atrybutów mianowicie **In_Progress** (na **1**) oraz **Completed** (na **0**) w celu zwizualizowania aktualnego stanu szyfrowanych plików,
 
 - dodać kolejne activity uruchamiające przedstawioną poniżej funkcję szyfrującą (kod znajduje się na samym dole strony), za pośrednictwem usługi **Azure Functions**,
 
-- dodać kolejne activity aktualizujące dodany wcześniej wpis ustawiający flagę **IN_PROGRESS** na **0** oraz **COMPLETED** na **1**,
+- dodać kolejne activity aktualizujące dodany wcześniej wpis na bazie ustawiając flagę **In_Progress** na **0** oraz **Completed** na **1**,
 
 ```c#
 public static async Task<JObject> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, TraceWriter log)
